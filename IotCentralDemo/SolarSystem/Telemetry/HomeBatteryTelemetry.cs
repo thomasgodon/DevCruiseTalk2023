@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace SolarSystem.Telemetry
 {
-    internal class SolarTelemetry : ITelemetry
+    internal class HomeBatteryTelemetry : ITelemetry
     {
         public int Id { get; init; }
-        public double Voltage { get; init; }
-        public double Power { get; init; }
+        public double Poc { get; init; }
 
     }
 }
