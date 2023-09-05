@@ -58,6 +58,8 @@ resource devCruiseIotDevicesFunctionApp 'Microsoft.Web/sites@2021-03-01' = {
     enabled: true
     clientAffinityEnabled: false
     siteConfig:{
+      http20Enabled: true
+      ftpsState: 'Disabled'
       appSettings: devCruiseIotDevicesAppConfig
     }
   }
@@ -162,6 +164,8 @@ resource devCruiseTelemetryConsumerFunctionApp 'Microsoft.Web/sites@2021-03-01' 
     enabled: true
     clientAffinityEnabled: false
     siteConfig:{
+      http20Enabled: true
+      ftpsState: 'Disabled'
       appSettings: telemetryConsumerAppConfig
     }
   }
