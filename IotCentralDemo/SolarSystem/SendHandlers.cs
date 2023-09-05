@@ -8,22 +8,31 @@ namespace SolarSystem
 {
     public class SendHandlers
     {
+        public SendHandlers()
+        {
+            
+        }
+
         [FunctionName("SolarPanel")]
-        public async Task SendSolarData(
-            [TimerTrigger("SolarPanelSendInterval")]TimerInfo _, 
+        public Task SendSolarData(
+            [TimerTrigger("%SolarPanelSendInterval%")]TimerInfo timerInfo, 
             ILogger log,
             CancellationToken cancellationToken)
         {
             log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
+
+            return Task.CompletedTask;
         }
 
         [FunctionName("HomeBattery")]
-        public async Task SendBatteryData(
-            [TimerTrigger("%BatterySendInterval%")] TimerInfo _, 
+        public Task SendBatteryData(
+            [TimerTrigger("%BatterySendInterval%")] TimerInfo timerInfo, 
             ILogger log,
             CancellationToken cancellationToken)
         {
             log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
+
+            return Task.CompletedTask;
         }
     }
 }
