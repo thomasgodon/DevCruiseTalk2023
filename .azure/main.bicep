@@ -45,18 +45,6 @@ var devCruiseIotDevicesAppConfig = [
     name: 'AzureWebJobsStorage'
     value: 'DefaultEndpointsProtocol=https;AccountName=${devCruiseStorageAccount.name};AccountKey=${devCruiseStorageAccount.listKeys().keys[0].value};EndpointSuffix=${environment().suffixes.storage}'
   }
-  {
-    name: 'EventHubOptions:ConnectionString__fullyQualifiedNamespace'
-    value: '${devCruiseEventHubNamespace.name}.servicebus.windows.net'
-  }
-  {
-    name: 'EventHubOptions:EventHubName'
-    value: devCruiseTelemetryEventHub.name
-  }
-  {
-    name: 'EventHubOptions:ConsumerGroup'
-    value: createTelemetryEventHubConsumerGroup.name
-  }
 ]
 
 resource devCruiseIotDevicesFunctionApp 'Microsoft.Web/sites@2021-03-01' = {
