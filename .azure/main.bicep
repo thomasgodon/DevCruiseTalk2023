@@ -6,6 +6,9 @@ param resourceTags object = {
 var azureEventHubsDataSender = '2b629674-e913-4c01-ae53-ef4638d8f975'
 var azureEventHubsDataReceiver = 'a638d3c7-ab3a-418d-83e6-5f17a39d4fde'
 
+var telemetryConsumerFunctionAppName = 'devCruiseTelemetryConsumer'
+var iotDevicesFunctionAppName = 'devCruiseIotDevices'
+
 // create app service plan
 resource devCruiseAppServicePlan 'Microsoft.Web/serverfarms@2022-09-01' = {
   name: 'devCruiseServicePlan'
@@ -18,7 +21,7 @@ resource devCruiseAppServicePlan 'Microsoft.Web/serverfarms@2022-09-01' = {
 }
 
 // create storage account (needed for azure function)
-resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
+resource devCruiseStorageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   name: 'devcruisestorageaccount'
   location: location
   tags: resourceTags
@@ -29,8 +32,35 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 }
 
 // create iot devices function app
+var devCruiseIotDevicesAppConfig = [
+  {
+    name: 'FUNCTIONS_EXTENSION_VERSION'
+    value: '~4'
+  }
+  {
+    name: 'FUNCTIONS_WORKER_RUNTIME'
+    value: 'dotnet'
+  }
+  {
+    name: 'AzureWebJobsStorage'
+    value: 'DefaultEndpointsProtocol=https;AccountName=${devCruiseStorageAccount.name};AccountKey=${devCruiseStorageAccount.listKeys().keys[0].value};EndpointSuffix=${environment().suffixes.storage}'
+  }
+  {
+    name: 'EventHubOptions:ConnectionString__fullyQualifiedNamespace'
+    value: '${devCruiseEventHubNamespace.name}.servicebus.windows.net'
+  }
+  {
+    name: 'EventHubOptions:EventHubName'
+    value: devCruiseTelemetryEventHub.name
+  }
+  {
+    name: 'EventHubOptions:ConsumerGroup'
+    value: createTelemetryEventHubConsumerGroup.name
+  }
+]
+
 resource devCruiseIotDevicesFunctionApp 'Microsoft.Web/sites@2021-03-01' = {
-  name: 'devCruiseIotDevices'
+  name: iotDevicesFunctionAppName
   tags: resourceTags
   location: location
   kind: 'functionapp'
@@ -39,6 +69,9 @@ resource devCruiseIotDevicesFunctionApp 'Microsoft.Web/sites@2021-03-01' = {
     httpsOnly: true
     enabled: true
     clientAffinityEnabled: false
+    siteConfig:{
+      appSettings: devCruiseIotDevicesAppConfig
+    }
   }
 }
 
@@ -110,8 +143,12 @@ var telemetryConsumerAppConfig = [
     value: 'dotnet'
   }
   {
+    name: 'AzureWebJobsStorage'
+    value: 'DefaultEndpointsProtocol=https;AccountName=${devCruiseStorageAccount.name};AccountKey=${devCruiseStorageAccount.listKeys().keys[0].value};EndpointSuffix=${environment().suffixes.storage}'
+  }
+  {
     name: 'EventHubOptions:ConnectionString__fullyQualifiedNamespace'
-    value: '${devCruiseEventHubNamespace}.servicebus.windows.net'
+    value: '${devCruiseEventHubNamespace.name}.servicebus.windows.net'
   }
   {
     name: 'EventHubOptions:EventHubName'
@@ -124,7 +161,7 @@ var telemetryConsumerAppConfig = [
 ]
 
 resource devCruiseTelemetryConsumerFunctionApp 'Microsoft.Web/sites@2021-03-01' = {
-  name: 'devCruiseTelemetryConsumer'
+  name: telemetryConsumerFunctionAppName
   tags: resourceTags
   location: location
   kind: 'functionapp'
