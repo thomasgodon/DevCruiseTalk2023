@@ -4,6 +4,7 @@ param resourceTags object = {
   Purpose: 'devCruise'
 }
 var azureEventHubsDataSender = '2b629674-e913-4c01-ae53-ef4638d8f975'
+var azureEventHubsDataReceiver = 'a638d3c7-ab3a-418d-83e6-5f17a39d4fde'
 
 // create app service plan
 resource devCruiseAppServicePlan 'Microsoft.Web/serverfarms@2022-09-01' = {
@@ -27,23 +28,9 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   kind: 'StorageV2'
 }
 
-// create iot devices function
+// create iot devices function app
 resource devCruiseIotDevicesFunctionApp 'Microsoft.Web/sites@2021-03-01' = {
   name: 'devCruiseIotDevices'
-  tags: resourceTags
-  location: location
-  kind: 'functionapp'
-  properties: {
-    serverFarmId: devCruiseAppServicePlan.id
-    httpsOnly: true
-    enabled: true
-    clientAffinityEnabled: false
-  }
-}
-
-// create iot devices function
-resource devCruiseTelemetryConsumerFunctionApp 'Microsoft.Web/sites@2021-03-01' = {
-  name: 'devCruiseTelemetryConsumer'
   tags: resourceTags
   location: location
   kind: 'functionapp'
@@ -95,7 +82,7 @@ resource devCruiseIotCentralApplication 'Microsoft.IoTCentral/iotApps@2021-06-01
 }
 
 // set event hub data sender role for iot central
-resource assignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+resource iotCentralDataSenderAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(devCruiseTelemetryEventHub.id, resourceGroup().id, azureEventHubsDataSender, devCruiseIotCentralApplication.id)
   scope: devCruiseTelemetryEventHub
   properties: {
@@ -103,5 +90,66 @@ resource assignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
     principalId: devCruiseIotCentralApplication.identity.principalId
     principalType: 'ServicePrincipal'
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', azureEventHubsDataSender)
+  }
+}
+
+// create telemetry consumer function consumer group
+resource createTelemetryEventHubConsumerGroup 'Microsoft.EventHub/namespaces/eventhubs/consumergroups@2022-01-01-preview' = {
+  name: 'telemetry-consumer-function'
+  parent: devCruiseTelemetryEventHub
+}
+
+// create telemetry consumer function app
+var telemetryConsumerAppConfig = [
+  {
+    name: 'FUNCTIONS_EXTENSION_VERSION'
+    value: '~4'
+  }
+  {
+    name: 'FUNCTIONS_WORKER_RUNTIME'
+    value: 'dotnet'
+  }
+  {
+    name: 'EventHubOptions:ConnectionString__fullyQualifiedNamespace'
+    value: '${devCruiseEventHubNamespace}.servicebus.windows.net'
+  }
+  {
+    name: 'EventHubOptions:EventHubName'
+    value: devCruiseTelemetryEventHub.name
+  }
+  {
+    name: 'EventHubOptions:ConsumerGroup'
+    value: createTelemetryEventHubConsumerGroup.name
+  }
+]
+
+resource devCruiseTelemetryConsumerFunctionApp 'Microsoft.Web/sites@2021-03-01' = {
+  name: 'devCruiseTelemetryConsumer'
+  tags: resourceTags
+  location: location
+  kind: 'functionapp'
+  identity: {
+    type: 'SystemAssigned'
+  }
+  properties: {
+    serverFarmId: devCruiseAppServicePlan.id
+    httpsOnly: true
+    enabled: true
+    clientAffinityEnabled: false
+    siteConfig:{
+      appSettings: telemetryConsumerAppConfig
+    }
+  }
+}
+
+// set event hub data reader role for telemetry consumer function app
+resource telemetryConsumerDataReceiverAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(devCruiseTelemetryEventHub.id, resourceGroup().id, azureEventHubsDataReceiver, devCruiseTelemetryConsumerFunctionApp.id)
+  scope: devCruiseTelemetryEventHub
+  properties: {
+    description: 'Add role to eventhub'
+    principalId: devCruiseTelemetryConsumerFunctionApp.identity.principalId
+    principalType: 'ServicePrincipal'
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', azureEventHubsDataReceiver)
   }
 }
