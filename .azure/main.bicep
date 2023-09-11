@@ -49,6 +49,14 @@ var devCruiseIotDevicesAppConfig = [
     value: 'DefaultEndpointsProtocol=https;AccountName=${devCruiseStorageAccount.name};AccountKey=${devCruiseStorageAccount.listKeys().keys[0].value};EndpointSuffix=${environment().suffixes.storage}'
   }
   {
+    name: 'SolarPanelSendInterval'
+    value: solarPanel.sendInterval
+  }
+  {
+    name: 'BatterySendInterval'
+    value: solarPanel.sendInterval
+  }
+  {
     name: 'DeviceSettings:SolarPanel:DeviceId'
     value: solarPanel.deviceId
   }
