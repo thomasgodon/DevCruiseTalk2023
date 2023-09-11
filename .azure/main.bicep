@@ -3,6 +3,9 @@ param location string = resourceGroup().location
 param resourceTags object = {
   Purpose: 'devCruise'
 }
+param solarPanel object
+param homeBattery object
+
 var azureEventHubsDataSender = '2b629674-e913-4c01-ae53-ef4638d8f975'
 var azureEventHubsDataReceiver = 'a638d3c7-ab3a-418d-83e6-5f17a39d4fde'
 
@@ -44,6 +47,38 @@ var devCruiseIotDevicesAppConfig = [
   {
     name: 'AzureWebJobsStorage'
     value: 'DefaultEndpointsProtocol=https;AccountName=${devCruiseStorageAccount.name};AccountKey=${devCruiseStorageAccount.listKeys().keys[0].value};EndpointSuffix=${environment().suffixes.storage}'
+  }
+  {
+    name: 'DeviceSettings:SolarPanel:DeviceId'
+    value: solarPanel.deviceId
+  }
+  {
+    name: 'DeviceSettings:SolarPanel:IdScope'
+    value: solarPanel.idScope
+  }
+  {
+    name: 'DeviceSettings:SolarPanel:PrimaryKey'
+    value: solarPanel.primaryKey
+  }
+  {
+    name: 'DeviceSettings:SolarPanel:SecondaryKey'
+    value: solarPanel.secondaryKey
+  }
+  {
+    name: 'DeviceSettings:HomeBattery:DeviceId'
+    value: homeBattery.deviceId
+  }
+  {
+    name: 'DeviceSettings:HomeBattery:IdScope'
+    value: homeBattery.idScope
+  }
+  {
+    name: 'DeviceSettings:HomeBattery:PrimaryKey'
+    value: homeBattery.primaryKey
+  }
+  {
+    name: 'DeviceSettings:HomeBattery:SecondaryKey'
+    value: homeBattery.secondaryKey
   }
 ]
 
