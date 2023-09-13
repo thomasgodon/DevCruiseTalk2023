@@ -2,6 +2,8 @@ using System.Threading.Tasks;
 using Azure.Messaging.EventHubs;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace TelemetryConsumer
 {
@@ -14,8 +16,8 @@ namespace TelemetryConsumer
         {
             foreach (var eventData in events)
             {
-                var rawEventBody = eventData.EventBody.ToString();
-                logger.LogInformation(rawEventBody);
+                var rawEventBody = JObject.Parse(eventData.EventBody.ToString());
+                logger.LogInformation(rawEventBody.ToString(Formatting.Indented));
                 await Task.Yield();
             }
         }
