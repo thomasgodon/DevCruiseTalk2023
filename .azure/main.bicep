@@ -3,14 +3,11 @@ param location string = resourceGroup().location
 param resourceTags object = {
   Purpose: 'devCruise'
 }
-param solarPanel object
-param homeBattery object
 
 var azureEventHubsDataSender = '2b629674-e913-4c01-ae53-ef4638d8f975'
 var azureEventHubsDataReceiver = 'a638d3c7-ab3a-418d-83e6-5f17a39d4fde'
 
 var telemetryConsumerFunctionAppName = 'devCruiseTelemetryConsumer'
-var iotDevicesFunctionAppName = 'devCruiseIotDevices'
 
 // create app service plan
 resource devCruiseAppServicePlan 'Microsoft.Web/serverfarms@2022-09-01' = {
