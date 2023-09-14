@@ -1,0 +1,64 @@
+{
+    "@id": "dtmi:devcruise:SolarSystem_1ji;1",
+    "@type": "Interface",
+    "contents": [
+        {
+            "@id": "dtmi:devcruise:SolarSystem_1ji:Id;1",
+            "@type": [
+                "Telemetry",
+                "NumberValue"
+            ],
+            "displayName": {
+                "en": "Id"
+            },
+            "name": "Id",
+            "schema": "integer"
+        },
+        {
+            "@id": "dtmi:devcruise:SolarSystem_1ji:Power;1",
+            "@type": [
+                "Telemetry",
+                "NumberValue"
+            ],
+            "displayName": {
+                "en": "Power"
+            },
+            "name": "Power",
+            "schema": "double",
+            "unit": "watt"
+        },
+        {
+            "@id": "dtmi:devcruise:SolarSystem_1ji:Voltage;1",
+            "@type": [
+                "Telemetry",
+                "NumberValue"
+            ],
+            "displayName": {
+                "en": "Voltage"
+            },
+            "name": "Voltage",
+            "schema": "double",
+            "unit": "volt"
+        },
+        {
+            "@id": "dtmi:devcruise:SolarSystem_1ji:Poc;1",
+            "@type": [
+                "Telemetry",
+                "NumberValue"
+            ],
+            "displayName": {
+                "en": "Poc"
+            },
+            "name": "Poc",
+            "schema": "double",
+            "unit": "percent"
+        }
+    ],
+    "displayName": {
+        "en": "SolarSystem"
+    },
+    "@context": [
+        "dtmi:iotcentral:context;2",
+        "dtmi:dtdl:context;2"
+    ]
+}

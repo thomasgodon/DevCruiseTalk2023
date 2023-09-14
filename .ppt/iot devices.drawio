@@ -1,0 +1,31 @@
+<mxfile host="Electron" modified="2023-09-10T09:24:40.149Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.5 Chrome/114.0.5735.243 Electron/25.3.1 Safari/537.36" etag="uchYC32oCBrNY1gvCXTs" version="21.6.5" type="device">
+  <diagram name="Page-1" id="AM6qWU1mM3HDpeMpf9cu">
+    <mxGraphModel dx="1416" dy="818" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2if_9HrO44y4mZJJhcqe-1" value="IoT Central Application" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/iot/IoT_Central_Applications.svg;" vertex="1" parent="1">
+          <mxGeometry x="440" y="218" width="113.04" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="2if_9HrO44y4mZJJhcqe-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2if_9HrO44y4mZJJhcqe-2" target="2if_9HrO44y4mZJJhcqe-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2if_9HrO44y4mZJJhcqe-2" value="IoT Device" style="sketch=0;aspect=fixed;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#00188D;shape=mxgraph.mscae.enterprise.device" vertex="1" parent="1">
+          <mxGeometry x="70" y="270" width="50" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="2if_9HrO44y4mZJJhcqe-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2if_9HrO44y4mZJJhcqe-4" target="2if_9HrO44y4mZJJhcqe-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2if_9HrO44y4mZJJhcqe-4" value="IoT Device" style="sketch=0;aspect=fixed;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#00188D;shape=mxgraph.mscae.enterprise.device" vertex="1" parent="1">
+          <mxGeometry x="70" y="340" width="50" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="2if_9HrO44y4mZJJhcqe-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2if_9HrO44y4mZJJhcqe-5" target="2if_9HrO44y4mZJJhcqe-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2if_9HrO44y4mZJJhcqe-5" value="IoT Device" style="sketch=0;aspect=fixed;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#00188D;shape=mxgraph.mscae.enterprise.device" vertex="1" parent="1">
+          <mxGeometry x="70" y="200" width="50" height="26" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

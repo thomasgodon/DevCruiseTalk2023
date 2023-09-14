@@ -1,0 +1,52 @@
+<mxfile host="Electron" modified="2023-09-10T12:37:09.559Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.5 Chrome/114.0.5735.243 Electron/25.3.1 Safari/537.36" etag="zsV05zVljXOzEaTvz3ha" version="21.6.5" type="device">
+  <diagram name="Page-1" id="AM6qWU1mM3HDpeMpf9cu">
+    <mxGraphModel dx="2266" dy="818" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2if_9HrO44y4mZJJhcqe-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2if_9HrO44y4mZJJhcqe-1" target="2if_9HrO44y4mZJJhcqe-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2if_9HrO44y4mZJJhcqe-1" value="IoT Central Application" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/iot/IoT_Central_Applications.svg;" vertex="1" parent="1">
+          <mxGeometry x="240" y="236" width="113.04" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="2if_9HrO44y4mZJJhcqe-10" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="-80" y="173" width="178" height="242" as="geometry" />
+        </mxCell>
+        <mxCell id="2if_9HrO44y4mZJJhcqe-8" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="2if_9HrO44y4mZJJhcqe-10">
+          <mxGeometry y="32" width="150" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="2if_9HrO44y4mZJJhcqe-2" value="Battery" style="sketch=0;aspect=fixed;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#00188D;shape=mxgraph.mscae.enterprise.device" vertex="1" parent="2if_9HrO44y4mZJJhcqe-10">
+          <mxGeometry x="50" y="147" width="50" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="2if_9HrO44y4mZJJhcqe-5" value="Solar Panel" style="sketch=0;aspect=fixed;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#00188D;shape=mxgraph.mscae.enterprise.device" vertex="1" parent="2if_9HrO44y4mZJJhcqe-10">
+          <mxGeometry x="50" y="77" width="50" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="2if_9HrO44y4mZJJhcqe-9" value="" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/compute/Function_Apps.svg;" vertex="1" parent="2if_9HrO44y4mZJJhcqe-10">
+          <mxGeometry x="110" width="68" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2if_9HrO44y4mZJJhcqe-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2if_9HrO44y4mZJJhcqe-5" target="2if_9HrO44y4mZJJhcqe-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2if_9HrO44y4mZJJhcqe-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2if_9HrO44y4mZJJhcqe-2" target="2if_9HrO44y4mZJJhcqe-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2if_9HrO44y4mZJJhcqe-30" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="470" y="164" width="178" height="242" as="geometry" />
+        </mxCell>
+        <mxCell id="2if_9HrO44y4mZJJhcqe-26" value="" style="rounded=0;whiteSpace=wrap;html=1;container=0;" vertex="1" parent="2if_9HrO44y4mZJJhcqe-30">
+          <mxGeometry y="32" width="150" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="2if_9HrO44y4mZJJhcqe-27" value="" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/compute/Function_Apps.svg;container=0;" vertex="1" parent="2if_9HrO44y4mZJJhcqe-30">
+          <mxGeometry x="110" width="68" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2if_9HrO44y4mZJJhcqe-29" value="ExportConsumer" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;container=0;" vertex="1" parent="2if_9HrO44y4mZJJhcqe-30">
+          <mxGeometry x="20" y="122" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="2if_9HrO44y4mZJJhcqe-32" value="- Create devices&lt;br&gt;- Create device templates&lt;br&gt;- Define exports" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="230" y="190" width="170" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
