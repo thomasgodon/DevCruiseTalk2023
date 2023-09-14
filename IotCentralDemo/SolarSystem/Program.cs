@@ -120,15 +120,16 @@ namespace SolarSystem
         // create the device client (and register)
         private static async Task<DeviceClient?> CreateDeviceClientAsync(DeviceOptions deviceOptions, CancellationToken cancellationToken)
         {
-            var underlyingIotHub = await RegisterIotDevice(deviceOptions, cancellationToken);
+            Console.WriteLine($"Registering device '{deviceOptions.DeviceId}'");
+            var iotHub = await RegisterIotDevice(deviceOptions, cancellationToken);
 
-            if (underlyingIotHub == null)
+            if (iotHub == null)
             {
                 return null;
             }
 
             var authMethod = new DeviceAuthenticationWithRegistrySymmetricKey(deviceOptions.DeviceId, deviceOptions.PrimaryKey);
-            var client = DeviceClient.Create(underlyingIotHub, authMethod, TransportType.Amqp);
+            var client = DeviceClient.Create(iotHub, authMethod, TransportType.Amqp);
             if (client == null)
             {
                 Console.WriteLine($"Could not create device {deviceOptions.DeviceId}");
@@ -151,7 +152,7 @@ namespace SolarSystem
             }
             catch (Exception)
             {
-                Console.WriteLine($"Could not get underlying iot hub for device '{deviceOptions.DeviceId}'");
+                Console.WriteLine($"Could not register device '{deviceOptions.DeviceId}'");
                 return null;
             }
         }
