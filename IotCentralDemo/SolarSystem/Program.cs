@@ -23,10 +23,10 @@ namespace SolarSystem
 
         private const string ProvisioningUri = "global.azure-devices-provisioning.net";
 
-        static async Task Main(string[] args)
+        private static async Task Main()
         {
             var cts = new CancellationTokenSource();
-            Console.CancelKeyPress += (s, e) =>
+            Console.CancelKeyPress += (_, e) =>
             {
                 Console.WriteLine("Canceling...");
                 cts.Cancel();
@@ -40,7 +40,7 @@ namespace SolarSystem
                 IdScope = SolarPanelIdScope,
                 PrimaryKey = SolarPanelPrimaryKey,
                 SecondaryKey = SolarPanelSecondaryKey,
-            }; ;
+            };
             var solarPanelDevice = await CreateDeviceClientAsync(solarBatteryOptions, cts.Token);
             if (solarPanelDevice == null)
             {
@@ -140,7 +140,7 @@ namespace SolarSystem
                 var registerResult = await dps.RegisterAsync(cancellationToken);
                 return registerResult.AssignedHub;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Console.WriteLine($"Could not get underlying iot hub for device '{deviceOptions.DeviceId}'");
                 return null;
