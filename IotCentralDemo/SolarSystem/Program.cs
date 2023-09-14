@@ -11,6 +11,7 @@ namespace SolarSystem
 {
     internal class Program
     {
+        // fill in device settings provided by iot central
         private const string SolarPanelDeviceId = "";
         private const string SolarPanelIdScope = "";
         private const string SolarPanelPrimaryKey = "";
@@ -63,6 +64,7 @@ namespace SolarSystem
                 return;
             }
 
+            // send telemetry periodically for the 2 devices
             while (cts.Token.IsCancellationRequested is false)
             {
                 await SendSolarPanelTelemetryAsync(solarPanelDevice, cts.Token);
@@ -75,6 +77,7 @@ namespace SolarSystem
 
         private static async Task SendSolarPanelTelemetryAsync(DeviceClient iotDevice, CancellationToken cancellationToken)
         {
+            // create solar panel telemetry data and send it to the iot device
             var telemetry = CreateSolarTelemetry();
             var message = CreateIotDeviceMessage(telemetry);
             await iotDevice.SendEventAsync(message, cancellationToken);
@@ -83,12 +86,14 @@ namespace SolarSystem
 
         private static async Task SendHomeBatteryTelemetryAsync(DeviceClient iotDevice, CancellationToken cancellationToken)
         {
+            // create home battery telemetry data and send it to the iot device
             var telemetry = CreateHomeBatterTelemetry();
             var message = CreateIotDeviceMessage(telemetry);
             await iotDevice.SendEventAsync(message, cancellationToken);
             Console.WriteLine(JsonConvert.SerializeObject(telemetry, Formatting.Indented));
         }
 
+        // create random solar telemetry
         private static SolarPanelTelemetry CreateSolarTelemetry() =>
             new()
             {
@@ -97,6 +102,7 @@ namespace SolarSystem
                 Voltage = new Random().NextDouble() * 230
             };
 
+        // create random home battery telemetry
         private static HomeBatteryTelemetry CreateHomeBatterTelemetry() =>
             new()
             {
@@ -104,15 +110,17 @@ namespace SolarSystem
                 Poc = new Random().NextDouble() * 100,
             };
 
+        // convert telemetry object to a iot device message
         private static Message CreateIotDeviceMessage<T>(T telemetry) where T : ITelemetry
         {
             var serializedTelemetry = JsonSerializer.Serialize(telemetry);
             return new Message(Encoding.UTF8.GetBytes(serializedTelemetry));
         }
 
+        // create the device client (and register)
         private static async Task<DeviceClient?> CreateDeviceClientAsync(DeviceOptions deviceOptions, CancellationToken cancellationToken)
         {
-            var underlyingIotHub = await GetUnderlyingIotHub(deviceOptions, cancellationToken);
+            var underlyingIotHub = await RegisterIotDevice(deviceOptions, cancellationToken);
 
             if (underlyingIotHub == null)
             {
@@ -131,7 +139,8 @@ namespace SolarSystem
             return client;
         }
 
-        private static async Task<string?> GetUnderlyingIotHub(DeviceOptions deviceOptions, CancellationToken cancellationToken)
+        // register iot device to dps to retrieve iot hub endpoint
+        private static async Task<string?> RegisterIotDevice(DeviceOptions deviceOptions, CancellationToken cancellationToken)
         {
             try
             {
