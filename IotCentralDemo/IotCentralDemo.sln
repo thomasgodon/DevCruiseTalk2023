@@ -5,7 +5,13 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelemetryConsumer", "TelemetryConsumer\TelemetryConsumer.csproj", "{9019A522-ED9E-47BD-A475-BC0C8BBEE6D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolarSystem", "SolarSystem\SolarSystem.csproj", "{2B37ED73-7248-4B9D-8B42-077E20A50005}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolarSystem", "SolarSystem\SolarSystem.csproj", "{2B37ED73-7248-4B9D-8B42-077E20A50005}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{4684287E-3BA7-4F4F-80F6-C11F76681491}"
+	ProjectSection(SolutionItems) = preProject
+		..\.iotCentral\solarSystemDtdl.json = ..\.iotCentral\solarSystemDtdl.json
+		..\.iotCentral\transformQuery.jq = ..\.iotCentral\transformQuery.jq
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
